@@ -1,0 +1,160 @@
+<div class="table-responsive">
+    <table class="table table-hover table-striped">
+        <tr>
+            <td><a ng-click="sorttable('no')">No</a></td>
+            <td><a ng-click="sorttable('Name')">Name</a></td>
+            <td><a ng-click="sorttable('from')">From</a></td>
+            <td><a ng-click="sorttable('to')">To</a></td>
+            <td><a ng-click="sorttable('time')">Time</a></td>
+            <td><a ng-click="sorttable('price')">Price</a></td>
+            <td><a ng-click="sorttable('status[1]')">Status</a></td>
+            <td>Operation</td>
+        </tr>
+        <tr ng-repeat="d in data">
+            <td>{{d.no}}</td>
+            <td>{{d.Name}}</td>
+            <td>{{d.from}}</td>
+            <td>{{d.to}}</td>
+            <td>{{d.time}}</td>
+            <td>{{d.price | currency}}</td>
+            <td><a ng-click="changestate(d)" ng-class="{'btn btn-danger': d.status[0] == true , 'btn btn-success': d.status[0] == false}">{{d.status[1]}}</a></td>
+            <td><button ng-click="details(d)" class="btn btn-info" data-toggle="modal" data-target="#myModal">Info</button>
+                <button ng-click="delete(d.no)" ng-disabled="d.status[0] == true" ng-class="{'btn btn-danger disabled': d.status[0] == true , 'btn btn-danger': d.status[0] == false}">Delete</button>
+                <button ng-click="update(d)" ng-disabled="d.status[0] == true" ng-class="{'btn btn-warning disabled': d.status[0] == true , 'btn btn-warning': d.status[0] == false}"
+                    data-toggle="modal" data-target="#updateModal">Update</button></td>
+        </tr>
+    </table>
+</div>
+
+
+<button class="btn btn-primary" ng-click="reset()" data-toggle="modal" data-target="#ticketModal">Add Ticket</button>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Flight Details</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label><b>Flight Id:</b></label> <span> {{info.no}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label><b>Pilot Name:</b></label> <span> {{info.Name}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label><b>From:</b></label> <span> {{info.from}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label><b>To:</b></label> <span> {{info.to}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label><b>Time:</b></label> <span> {{info.time}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label><b>Price:</b></label> <span> {{info.price | currency}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label><b>Status:</b></label> <span> {{info.status[1]}}</span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="ticketModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Flight Details</h4>
+            </div>
+            <div class="modal-body">
+                <form id="addingform" name="addform" novalidate>
+                    <div class="form-group">
+                        <label><b>Flight Id:</b></label>
+                        <input type="number" name="no" min="1" class="form-control" placeholder="ID" ng-model="NO" required>
+                    </div>
+                    <div class="form-group">
+                        <label><b>Pilot Name:</b></label>
+                        <input pattern="^[A-Za-z]+$" type="text" name="pname" class="form-control" ng-model="n" placeholder="Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label><b>From:</b></label>
+                        <input pattern="^[A-Za-z]+$" type="text" name="from" class="form-control" ng-model="f" placeholder="From" required>
+                    </div>
+                    <div class="form-group">
+                        <label><b>To:</b></label>
+                        <input pattern="^[A-Za-z]+$" type="text" name="to" class="form-control" ng-model="t" placeholder="To" required>
+                    </div>
+                    <div class="form-group">
+                        <label><b>Time:</b></label>
+                        <input pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" type="text" name="time" class="form-control" ng-model="ti" placeholder="Time" required>
+                    </div>
+                    <div class="form-group">
+                        <label><b>Price:</b></label>
+                        <input type="number" name="price" min="1" class="form-control" ng-model="p" placeholder="Price" required>
+                    </div>
+                    <div class="form-group">
+                        <label><b>Status:</b></label> <span>Available</span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button ng-disabled="addform.$invalid" type="button" ng-click="add()" data-dismiss="modal" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="updateModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Flight Details</h4>
+            </div>
+            <div class="modal-body">
+                <form id="upform" name="updateform" novalidate>
+                    <div class="form-group">
+                        <input type="hidden" name="no" ng-value="detials.no" />
+                        <label><b>Pilot Name:</b></label>
+                        <input pattern="^[A-Za-z]+$" type="text" name="pname" class="form-control" placeholder="Name" ng-value="detials.Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label><b>From:</b></label>
+                        <input pattern="^[A-Za-z]+$" type="text" name="from" class="form-control" placeholder="From" ng-value="detials.from" required>
+                    </div>
+                    <div class="form-group">
+                        <label><b>To:</b></label>
+                        <input pattern="^[A-Za-z]+$" type="text" name="to" class="form-control" placeholder="To" ng-value="detials.to" required>
+                    </div>
+                    <div class="form-group">
+                        <label><b>Time:</b></label>
+                        <input pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" type="text" name="time" class="form-control" placeholder="Time" ng-value="detials.time" required>
+                    </div>
+                    <div class="form-group">
+                        <label><b>Price:</b></label>
+                        <input type="number" name="price" min="1" class="form-control" placeholder="Price" ng-value="detials.price" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" ng-click="updateticket()" data-dismiss="modal" ng-disabled="updateform.$invalid" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

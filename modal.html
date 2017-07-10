@@ -1,0 +1,30 @@
+<div class="modal fade in" id="myModalcom">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+            <form>
+        <div class="form-group">
+            <label>Your Name: </label> <span>{{n}}</span>
+        </div>
+        <div class="form-group">
+            <label>Your Email: </label> <span>{{em}}</span>
+        </div>
+        <div class="form-group">
+            <label>Your Phone: </label> <span>{{p}}</span>
+        </div>
+       <div class="form-group">
+            <label>Your Complain: </label> <span>{{c}}</span>
+        </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="close()" data-dismiss="modal">Close</button>
+        <button type="button"  data-dismiss="modal" ng-click="modify()"  class="btn btn-primary">Modify</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Mymodel">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="public/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <script src="public/js/angular.js"></script>
+    <script src="public/js/angular-route.js"></script>
+    <script src="public/js/jquery-3.1.1.min.js"></script>
+    <style>
+        .carousel-inner>.item>img,
+        .carousel-inner>.item>a>img {
+            width: 70%;
+            margin: auto;
+        }
+        
+        #myModalcom {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="navbar navbar-inverse bg-primary">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="glyphicon glyphicon-menu-hamburger"></span>
+              </button>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#/">Home</a></li>
+                        <li><a href="#/tickets">Tickets</a></li>
+                        <li><a href="#/complain">Complain</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12" ng-view="">
+
+            </div>
+        </div>
+
+    </div>
+    <script src="public/js/jquery-P.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="public/js/bootstrap.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
